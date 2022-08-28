@@ -4,6 +4,7 @@ import agent from "../../agent";
 import { connect } from "react-redux";
 import {
   SEARCH_SUBMIT,
+  TOGGLE_SEARCH_BOX,
   UPDATE_SEARCH_KEYWORD,
 } from "../../constants/actionTypes";
 
@@ -20,6 +21,11 @@ const mapDispatchToProps = (dispatch) => ({
       type: UPDATE_SEARCH_KEYWORD,
       value: keyword,
     }),
+  onToggleSearch: (value) =>
+    dispatch({
+      type: TOGGLE_SEARCH_BOX,
+      value,
+    }),
 });
 
 const Banner = (props) => {
@@ -34,19 +40,23 @@ const Banner = (props) => {
       props.onSubmit(ev.target.value);
     }
   };
+
   return (
     <div className="banner text-white">
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span id="get-part">A place to get</span>
-          <input
-            id="search-box"
-            type="text"
-            placeholder="What is it that you truly desire?"
-            value={props.search.keyword || ""}
-            onChange={searchHandler}
-          />
+          <span id="get-part">A place to </span>
+          <span onClick={() => props.onToggleSearch(true)}>get</span>
+          {props.search.showSearch ? (
+            <input
+              id="search-box"
+              type="text"
+              placeholder="What is it that you truly desire?"
+              value={props.search.keyword || ""}
+              onChange={searchHandler}
+            />
+          ) : null}
           <span> the cool stuff.</span>
         </div>
       </div>
