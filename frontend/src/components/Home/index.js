@@ -8,7 +8,6 @@ import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER,
-  SEARCH_SUBMIT,
 } from "../../constants/actionTypes";
 
 const Promise = global.Promise;
@@ -25,8 +24,6 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (tab, pager, payload) =>
     dispatch({ type: HOME_PAGE_LOADED, tab, pager, payload }),
   onUnload: () => dispatch({ type: HOME_PAGE_UNLOADED }),
-  onSearchSubmit: (keyword) =>
-    dispatch({ type: SEARCH_SUBMIT, payload: agent.Items.byTitle(keyword) }),
 });
 
 class Home extends React.Component {
@@ -48,7 +45,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page">
-        <Banner onSearchSubmit={this.props.onSearchSubmit} />
+        <Banner />
 
         <div className="container page">
           <Tags tags={this.props.tags} onClickTag={this.props.onClickTag} />
