@@ -46,9 +46,7 @@ const Banner = (props) => {
         <img src={logo} alt="banner" />
         <div>
           <span id="get-part">A place to </span>
-          <span style={{ cursor: "pointer" }} onClick={props.onToggleSearch}>
-            get
-          </span>
+          <span onClick={props.onToggleSearch}>get</span>
           {props.search.showSearch ? (
             <input
               id="search-box"
