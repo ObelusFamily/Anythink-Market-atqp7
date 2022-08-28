@@ -21,9 +21,10 @@ const mapDispatchToProps = (dispatch) => ({
       type: UPDATE_SEARCH_KEYWORD,
       value: keyword,
     }),
-  onToggleSearch: () =>
+  onToggleSearch: (value) =>
     dispatch({
       type: TOGGLE_SEARCH_BOX,
+      value,
     }),
 });
 
@@ -46,7 +47,7 @@ const Banner = (props) => {
         <img src={logo} alt="banner" />
         <div>
           <span id="get-part">A place to </span>
-          <span onClick={props.onToggleSearch}>get</span>
+          <span onClick={() => props.onToggleSearch(true)}>get</span>
           {props.search.showSearch ? (
             <input
               id="search-box"

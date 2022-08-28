@@ -13,7 +13,7 @@ const reducer = (state = defaultState, action) => {
     case UPDATE_SEARCH_KEYWORD:
       return { ...state, keyword: action.value };
     case TOGGLE_SEARCH_BOX:
-      return { ...state, showSearch: !state.showSearch };
+      return { ...state, showSearch: action.value };
     default:
       return state;
   }
