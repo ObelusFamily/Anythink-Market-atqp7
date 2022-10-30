@@ -1,15 +1,37 @@
 import React from "react";
 import logo from "../../imgs/logo.png";
+import agent from "../../agent";
+import { connect } from "react-redux";
+import {
+  SEARCH_SUBMIT,
+  UPDATE_SEARCH_KEYWORD,
+} from "../../constants/actionTypes";
+
+const mapStateToProps = (state) => ({
+  ...state,
+  search: state.search,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: (keyword) =>
+    dispatch({ type: SEARCH_SUBMIT, payload: agent.Items.byTitle(keyword) }),
+  onKeywordChange: (keyword) =>
+    dispatch({
+      type: UPDATE_SEARCH_KEYWORD,
+      value: keyword,
+    }),
+});
 
 const Banner = (props) => {
   const searchHandler = (ev) => {
     ev.preventDefault();
+    props.onKeywordChange(ev.target.value);
     if (
       ev.target.value &&
       ev.target.value.trim() &&
       ev.target.value.length > 2
     ) {
-      props.onSearchSubmit(ev.target.value);
+      props.onSubmit(ev.target.value);
     }
   };
   return (
@@ -22,6 +44,7 @@ const Banner = (props) => {
             id="search-box"
             type="text"
             placeholder="What is it that you truly desire?"
+            value={props.search.keyword || ""}
             onChange={searchHandler}
           />
           <span> the cool stuff.</span>
@@ -31,4 +54,4 @@ const Banner = (props) => {
   );
 };
 
-export default Banner;
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);
