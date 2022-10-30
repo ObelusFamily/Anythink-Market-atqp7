@@ -46,8 +46,10 @@ const Banner = (props) => {
       <div className="container p-4 text-center">
         <img src={logo} alt="banner" />
         <div>
-          <span id="get-part">A place to </span>
-          <span onClick={() => props.onToggleSearch(true)}>get</span>
+          <span>A place to </span>
+          <span id="get-part" onClick={() => props.onToggleSearch(true)}>
+            get
+          </span>
           {props.search.showSearch ? (
             <input
               id="search-box"
